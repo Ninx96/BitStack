@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "stonks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "services/*"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "eslint": "^8.56.0",
+    "prettier-eslint": "^16.1.2",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "2.8.8",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.18.2",
+    "yarn": "1.22.22"
+  }
+}
