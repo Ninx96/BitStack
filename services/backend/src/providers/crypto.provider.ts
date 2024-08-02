@@ -14,7 +14,7 @@ export async function getCurrencyData(code: string, currency?: string): Promise<
   const response = await httpClient.post("/coins/single", {
     code,
     currency: currency || "USD",
-    meta: false,
+    meta: true,
   })
   response.data.code = code
   return response.data
