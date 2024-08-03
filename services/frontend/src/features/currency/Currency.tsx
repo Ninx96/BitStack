@@ -23,7 +23,11 @@ function Currency() {
     if (!cryptos.length) {
       dispatch(getCryptosAsync() as any)
     }
-    if (selectedCrypto) dispatch(getCryptoStatsAsync(selectedCrypto) as any)
+    if (selectedCrypto) {
+      dispatch(getCryptoStatsAsync(selectedCrypto) as any)
+      let intervalId = setInterval(() => dispatch(getCryptoStatsAsync(selectedCrypto) as any), 5 * 60000)
+      return () => clearInterval(intervalId)
+    }
   }, [selectedCrypto])
 
   return (
