@@ -10,7 +10,7 @@ export default (app: Router) => {
   route.get("/codes", async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = config.cryptoCodes
-      return res.status(200).json({ data })
+      return res.status(200).json({ isValid: true, payload: data })
     } catch (e) {
       return next(e)
     }
@@ -22,7 +22,7 @@ export default (app: Router) => {
       const data = await filterStatsByCrypto(code)
       return res.status(200).json({
         isValid: data.length ? true : false,
-        data: data,
+        payload: data,
       })
     } catch (e) {
       return next(e)
