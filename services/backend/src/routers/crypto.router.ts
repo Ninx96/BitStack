@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express"
 import config from "../config"
-import { getRecentCryptoData } from "../data/stores/mongo/crypto.store"
+import { filterStatsByCrypto } from "../data/stores/mongo/crypto.store"
 
 const route = Router()
 
@@ -19,8 +19,11 @@ export default (app: Router) => {
   route.get("/:code", async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { code } = req.params
-      const data = await getRecentCryptoData(code)
-      return res.status(200).json({ data })
+      const data = await filterStatsByCrypto(code)
+      return res.status(200).json({
+        isValid: data.length ? true : false,
+        data: data,
+      })
     } catch (e) {
       return next(e)
     }

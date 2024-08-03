@@ -38,14 +38,17 @@ interface Delta {
 
 //* Schema
 
-const DeltaSchema = new Schema<Delta>({
-  hour: { type: Number },
-  day: { type: Number },
-  week: { type: Number },
-  month: { type: Number },
-  quarter: { type: Number },
-  year: { type: Number },
-})
+const DeltaSchema = new Schema<Delta>(
+  {
+    hour: { type: Number },
+    day: { type: Number },
+    week: { type: Number },
+    month: { type: Number },
+    quarter: { type: Number },
+    year: { type: Number },
+  },
+  { _id: false },
+)
 
 const CryptoSchema = new Schema<Cryptocurrency>({
   name: { type: String },

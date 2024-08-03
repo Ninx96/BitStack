@@ -4,8 +4,38 @@ export function saveCrypto(data: Cryptocurrency) {
   return CryptoModel.create(data)
 }
 
-export function getRecentCryptoData(code: string, limit?: number) {
-  return CryptoModel.find({ code })
-    .sort({ _id: -1 })
-    .limit(limit || 20)
+export function filterStatsByCrypto(code: string, limit?: number) {
+  return CryptoModel.aggregate([
+    {
+      $match: {
+        code,
+      },
+    },
+    {
+      $sort: {
+        _id: -1,
+      },
+    },
+    {
+      $limit: limit || 20,
+    },
+    {
+      $group: {
+        _id: {
+          code: "$code",
+          name: "$name",
+          symbol: "$symbol",
+          webp64: "$webp64",
+        },
+        stats: {
+          $push: {
+            rate: "$rate",
+            volume: "$volume",
+            cap: "$cap",
+            delta: "$delta",
+          },
+        },
+      },
+    },
+  ])
 }
