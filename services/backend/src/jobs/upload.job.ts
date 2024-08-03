@@ -14,4 +14,4 @@ export async function callback() {
   }
 }
 
-export default new CronJob("0 */1 * * * *", callback)
+export default new CronJob("0 */5 * * * *", callback)
